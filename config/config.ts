@@ -5,8 +5,15 @@ interface DBConfig {
   password: string ;
   database: string ;
   host: string ;
-  port: number; // Or use `number | undefined` if you parse the port
+  port: number;
   dialect: Dialect;
+  dialectOptions?: {
+    ssl?: {
+      require: boolean;
+      rejectUnauthorized?: boolean;
+      ca?: string;
+    };
+  };
 }
 
 interface Config {
@@ -22,6 +29,12 @@ const config: Config = {
     host: `${process.env.DB_HOST}`,
     port: Number(process.env.DB_PORT),
     dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
   production: {
     username: `${process.env.DB_USER}`,

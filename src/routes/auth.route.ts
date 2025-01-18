@@ -12,6 +12,10 @@ export class AuthRoutes extends CommonRoutesConfig {
         this.app
             .route(`/${this.basePath}/${this.version}`)
             .get(AuthController.helloUser);
+
+        this.app
+            .route(`/${this.basePath}/${this.version}/signup`)
+            .get(AuthController.signUp);
         
         return this.app;
     }

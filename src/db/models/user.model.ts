@@ -1,6 +1,7 @@
 import { Model,DataTypes,Optional,Sequelize } from "sequelize";
 import bcrypt from 'bcryptjs'
-import sequelize from "sequelize";
+import EXTR_DB from '../database'
+const dbConn = EXTR_DB.getConnection();
 
 interface UserAttributes {
     id: number;
@@ -8,6 +9,8 @@ interface UserAttributes {
     lastName: string;
     email: string;
     password: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 // Define the input attributes for creating a new User
@@ -16,7 +19,7 @@ interface UserAttributes {
   tell Sequelize and TypeScript that the property id,
   in this case, is optional to be passed at creation time
 */
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+interface UserCreationAttributes extends Optional<UserAttributes, 'id' | 'createdAt' | 'updatedAt'> {}
 
 // Extend Sequelize's Model class with the User attributes and creation attributes
 class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
@@ -27,8 +30,8 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
     public password!: string;
   
     // Timestamps
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    public createdAt!: Date;
+    public updatedAt!: Date;
   
     // Static methods for password hashing and comparison
     static async hashPassword(password: string): Promise<string> {
@@ -45,13 +48,14 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
     }
   }
 
-  export default (sequelize: Sequelize): typeof User => {
+//   export default (sequelize: Sequelize): typeof User => {
     User.init(
       {
         id: {
-          type: DataTypes.INTEGER.UNSIGNED,
+          type: DataTypes.INTEGER,
           autoIncrement: true,
           primaryKey: true,
+          field: 'id'
         },
         firstName: {
           type: DataTypes.STRING,
@@ -70,6 +74,7 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
           validate: {
             isEmail: true,
           },
+          field: 'email',
         },
         password: {
           type: DataTypes.STRING,
@@ -77,15 +82,26 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
           validate: {
             len: [6, 100], // Password should be at least 6 characters
           },
+          field: 'password',
         },
+        createdAt:{
+            type: DataTypes.DATE,
+            field: 'created_at'
+        },
+        updatedAt:{
+            type: DataTypes.DATE,
+            field: 'updated_at'
+        }
       },
       {
-        sequelize,
+        sequelize: dbConn,
         modelName: 'User',
         tableName: 'users',
         timestamps: true,  // Enable createdAt and updatedAt
       }
     );
   
-    return User;
-  };
+//     return User;
+//   };
+
+export default User;
