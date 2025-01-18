@@ -1,0 +1,4 @@
+# EXPENSE TRACKER APPLICATION
+
+Members:
+1. Deetosh Kumar Kuila - 22CS30021
