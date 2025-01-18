@@ -4,8 +4,20 @@
   "description": "backend for an expense tracker application",
   "main": "app.ts",
   "scripts": {
+    "start": "ENVIRONMENT=local  node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "deetosh",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "express": "^4.21.2"
+  }
 }
