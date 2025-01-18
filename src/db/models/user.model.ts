@@ -56,10 +56,12 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
         firstName: {
           type: DataTypes.STRING,
           allowNull: false,
+          field: 'first_name',
         },
         lastName: {
           type: DataTypes.STRING,
           allowNull: false,
+          field: 'last_name',
         },
         email: {
           type: DataTypes.STRING,
@@ -80,7 +82,7 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
       {
         sequelize,
         modelName: 'User',
-        tableName: 'users', // Optional: specify the table name
+        tableName: 'users',
         timestamps: true,  // Enable createdAt and updatedAt
       }
     );
