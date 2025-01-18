@@ -5,16 +5,25 @@ if (dotenvResult.error) {
 }
 import express from 'express'
 import RouterConfig from "./src/routes";
+import cors from "cors"
 
 
 const app: express.Application = express();
 const port = process.env.PORT;
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // Configure the routes
 const routerConfig = new RouterConfig(app);
 routerConfig.configureRoutes();
 
 const runningMessage = `Server running at port : ${port}`
+
+// database
+import EXTR_DB from './src/db/database'
+const dbConn = EXTR_DB.getConnection();
 
 app.listen(port, ()=>{
     console.log(runningMessage);

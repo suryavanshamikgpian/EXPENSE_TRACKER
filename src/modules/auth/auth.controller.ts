@@ -11,6 +11,7 @@ class AuthController {
         AuthService: iAuthService,
     ){
         this.authService = AuthService;
+        this.helloUser = this.helloUser.bind(this);
     }
 
 
@@ -37,6 +38,8 @@ class AuthController {
             )
         }
     }
+
+    
 }
 
 const authServiceInstance = new AuthService();
