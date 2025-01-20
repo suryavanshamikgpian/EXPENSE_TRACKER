@@ -15,4 +15,10 @@ Members:
     <td>22CS30021</td>
     <td>deetosh</td>
   </tr>
+  <tr>
+    <td>2</td>
+    <td>Ishaan Jain</td>
+    <td>22CS10032</td>
+    <td>IshaanJain107</td>
+  </tr>
 </table>
