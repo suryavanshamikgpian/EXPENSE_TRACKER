@@ -21,4 +21,10 @@ Members:
     <td>22CS10032</td>
     <td>IshaanJain107</td>
   </tr>
+  <tr>
+    <td>3</td>
+    <td>Suryavansham Sahoo</td>
+    <td>23BT30032</td>
+    <td>suryavanshamikgpian</td>
+  </tr>
 </table>
